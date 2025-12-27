@@ -1,0 +1,342 @@
+Only in xv6_riscv_Modefied_File: fs.img
+Only in xv6_riscv_Modefied_File: .github
+Only in xv6_riscv_Modefied_File/kernel: bio.d
+Only in xv6_riscv_Modefied_File/kernel: bio.o
+Only in xv6_riscv_Modefied_File/kernel: console.d
+Only in xv6_riscv_Modefied_File/kernel: console.o
+Only in xv6_riscv_Modefied_File/kernel: entry.o
+Only in xv6_riscv_Modefied_File/kernel: exec.d
+Only in xv6_riscv_Modefied_File/kernel: exec.o
+Only in xv6_riscv_Modefied_File/kernel: file.d
+Only in xv6_riscv_Modefied_File/kernel: file.o
+Only in xv6_riscv_Modefied_File/kernel: fs.d
+Only in xv6_riscv_Modefied_File/kernel: fs.o
+Only in xv6_riscv_Modefied_File/kernel: hapinfo.h
+Only in xv6_riscv_Modefied_File/kernel: kalloc.d
+Only in xv6_riscv_Modefied_File/kernel: kalloc.o
+Only in xv6_riscv_Modefied_File/kernel: kernel
+Only in xv6_riscv_Modefied_File/kernel: kernel.asm
+Only in xv6_riscv_Modefied_File/kernel: kernel.sym
+Only in xv6_riscv_Modefied_File/kernel: kernelvec.o
+Only in xv6_riscv_Modefied_File/kernel: log.d
+Only in xv6_riscv_Modefied_File/kernel: log.o
+Only in xv6_riscv_Modefied_File/kernel: main.d
+Only in xv6_riscv_Modefied_File/kernel: main.o
+Only in xv6_riscv_Modefied_File/kernel: pipe.d
+Only in xv6_riscv_Modefied_File/kernel: pipe.o
+Only in xv6_riscv_Modefied_File/kernel: plic.d
+Only in xv6_riscv_Modefied_File/kernel: plic.o
+Only in xv6_riscv_Modefied_File/kernel: printf.d
+Only in xv6_riscv_Modefied_File/kernel: printf.o
+diff -r "xv6-riscv Raw File/kernel/proc.c" xv6_riscv_Modefied_File/kernel/proc.c
+126a127
+>   p->haplog_index = 0;
+Only in xv6_riscv_Modefied_File/kernel: proc.d
+diff -r "xv6-riscv Raw File/kernel/proc.h" xv6_riscv_Modefied_File/kernel/proc.h
+1a2,4
+> #include "types.h"
+> #include "hapinfo.h"
+> 
+106a110,113
+> 
+>   // Heap activity logging for hapinfo syscall
+>   struct haplog haplog[HAPLOG_SIZE];
+>   int haplog_index;
+Only in xv6_riscv_Modefied_File/kernel: proc.o
+Only in xv6_riscv_Modefied_File/kernel: sleeplock.d
+Only in xv6_riscv_Modefied_File/kernel: sleeplock.o
+Only in xv6_riscv_Modefied_File/kernel: spinlock.d
+Only in xv6_riscv_Modefied_File/kernel: spinlock.o
+Only in xv6_riscv_Modefied_File/kernel: start.d
+Only in xv6_riscv_Modefied_File/kernel: start.o
+Only in xv6_riscv_Modefied_File/kernel: string.d
+Only in xv6_riscv_Modefied_File/kernel: string.o
+Only in xv6_riscv_Modefied_File/kernel: swtch.o
+diff -r "xv6-riscv Raw File/kernel/syscall.c" xv6_riscv_Modefied_File/kernel/syscall.c
+96a97
+> extern uint64 sys_hapinfo(void);
+108,128c109,130
+< [SYS_fork]    sys_fork,
+< [SYS_exit]    sys_exit,
+< [SYS_wait]    sys_wait,
+< [SYS_pipe]    sys_pipe,
+< [SYS_read]    sys_read,
+< [SYS_kill]    sys_kill,
+< [SYS_exec]    sys_exec,
+< [SYS_fstat]   sys_fstat,
+< [SYS_chdir]   sys_chdir,
+< [SYS_dup]     sys_dup,
+< [SYS_getpid]  sys_getpid,
+< [SYS_sbrk]    sys_sbrk,
+< [SYS_pause]   sys_pause,
+< [SYS_uptime]  sys_uptime,
+< [SYS_open]    sys_open,
+< [SYS_write]   sys_write,
+< [SYS_mknod]   sys_mknod,
+< [SYS_unlink]  sys_unlink,
+< [SYS_link]    sys_link,
+< [SYS_mkdir]   sys_mkdir,
+< [SYS_close]   sys_close,
+---
+> [SYS_fork] = sys_fork,
+> [SYS_exit] = sys_exit,
+> [SYS_wait] = sys_wait,
+> [SYS_pipe] = sys_pipe,
+> [SYS_read] = sys_read,
+> [SYS_kill] = sys_kill,
+> [SYS_exec] = sys_exec,
+> [SYS_fstat] = sys_fstat,
+> [SYS_chdir] = sys_chdir,
+> [SYS_dup] = sys_dup,
+> [SYS_getpid] = sys_getpid,
+> [SYS_sbrk] = sys_sbrk,
+> [SYS_hapinfo] = sys_hapinfo,
+> [SYS_pause] = sys_pause,
+> [SYS_uptime] = sys_uptime,
+> [SYS_open] = sys_open,
+> [SYS_write] = sys_write,
+> [SYS_mknod] = sys_mknod,
+> [SYS_unlink] = sys_unlink,
+> [SYS_link] = sys_link,
+> [SYS_mkdir] = sys_mkdir,
+> [SYS_close] = sys_close,
+Only in xv6_riscv_Modefied_File/kernel: syscall.d
+diff -r "xv6-riscv Raw File/kernel/syscall.h" xv6_riscv_Modefied_File/kernel/syscall.h
+14,22c14,23
+< #define SYS_pause  13
+< #define SYS_uptime 14
+< #define SYS_open   15
+< #define SYS_write  16
+< #define SYS_mknod  17
+< #define SYS_unlink 18
+< #define SYS_link   19
+< #define SYS_mkdir  20
+< #define SYS_close  21
+---
+> #define SYS_hapinfo 13
+> #define SYS_pause  14
+> #define SYS_uptime 15
+> #define SYS_open   16
+> #define SYS_write  17
+> #define SYS_mknod  18
+> #define SYS_unlink 19
+> #define SYS_link   20
+> #define SYS_mkdir  21
+> #define SYS_close  22
+Only in xv6_riscv_Modefied_File/kernel: syscall.o
+Only in xv6_riscv_Modefied_File/kernel: sysfile.d
+Only in xv6_riscv_Modefied_File/kernel: sysfile.o
+diff -r "xv6-riscv Raw File/kernel/sysproc.c" xv6_riscv_Modefied_File/kernel/sysproc.c
+8a9
+> #include "hapinfo.h"
+44a46
+>   struct proc *p = myproc();
+48c50
+<   addr = myproc()->sz;
+---
+>   addr = p->sz;
+62c64
+<     myproc()->sz += n;
+---
+>     p->sz += n;
+63a66,77
+> 
+>   // Log the sbrk call for hapinfo
+>   if(p->haplog_index < HAPLOG_SIZE) {
+>     acquire(&tickslock);
+>     p->haplog[p->haplog_index].old_sz = addr;
+>     p->haplog[p->haplog_index].sbrk_size = n;
+>     p->haplog[p->haplog_index].size_change = (t == SBRK_EAGER || n < 0) ? n : 0;
+>     p->haplog[p->haplog_index].ticks = ticks;
+>     release(&tickslock);
+>     p->haplog_index++;
+>   }
+> 
+108a123,140
+> }
+> 
+> uint64
+> sys_hapinfo(void)
+> {
+>   uint64 addr;
+>   struct proc *p = myproc();
+>   struct hapinfo hi;
+> 
+>   argaddr(0, &addr);
+> 
+>   hi.log_index = p->haplog_index;
+>   memmove(hi.log, p->haplog, sizeof(struct haplog) * p->haplog_index);
+> 
+>   if (copyout(p->pagetable, addr, (char *)&hi, sizeof(hi)) < 0)
+>     return -1;
+> 
+>   return 0;
+Only in xv6_riscv_Modefied_File/kernel: sysproc.d
+Only in xv6_riscv_Modefied_File/kernel: sysproc.o
+Only in xv6_riscv_Modefied_File/kernel: trampoline.o
+Only in xv6_riscv_Modefied_File/kernel: trap.d
+Only in xv6_riscv_Modefied_File/kernel: trap.o
+Only in xv6_riscv_Modefied_File/kernel: uart.d
+Only in xv6_riscv_Modefied_File/kernel: uart.o
+Only in xv6_riscv_Modefied_File/kernel: virtio_disk.d
+Only in xv6_riscv_Modefied_File/kernel: virtio_disk.o
+Only in xv6_riscv_Modefied_File/kernel: vm.d
+Only in xv6_riscv_Modefied_File/kernel: vm.o
+Only in xv6_riscv_Modefied_File: make
+diff -r "xv6-riscv Raw File/Makefile" xv6_riscv_Modefied_File/Makefile
+145a146
+> 	$U/_hapinfo_test\
+Only in xv6_riscv_Modefied_File: make.zip
+Only in xv6_riscv_Modefied_File/mkfs: mkfs
+Only in xv6_riscv_Modefied_File/user: _cat
+Only in xv6_riscv_Modefied_File/user: cat.asm
+Only in xv6_riscv_Modefied_File/user: cat.d
+Only in xv6_riscv_Modefied_File/user: cat.o
+Only in xv6_riscv_Modefied_File/user: cat.sym
+Only in xv6_riscv_Modefied_File/user: _dorphan
+Only in xv6_riscv_Modefied_File/user: dorphan.asm
+Only in xv6_riscv_Modefied_File/user: dorphan.d
+Only in xv6_riscv_Modefied_File/user: dorphan.o
+Only in xv6_riscv_Modefied_File/user: dorphan.sym
+Only in xv6_riscv_Modefied_File/user: _echo
+Only in xv6_riscv_Modefied_File/user: echo.asm
+Only in xv6_riscv_Modefied_File/user: echo.d
+Only in xv6_riscv_Modefied_File/user: echo.o
+Only in xv6_riscv_Modefied_File/user: echo.sym
+Only in xv6_riscv_Modefied_File/user: _forktest
+Only in xv6_riscv_Modefied_File/user: forktest.asm
+Only in xv6_riscv_Modefied_File/user: forktest.d
+Only in xv6_riscv_Modefied_File/user: forktest.o
+Only in xv6_riscv_Modefied_File/user: _forphan
+Only in xv6_riscv_Modefied_File/user: forphan.asm
+Only in xv6_riscv_Modefied_File/user: forphan.d
+Only in xv6_riscv_Modefied_File/user: forphan.o
+Only in xv6_riscv_Modefied_File/user: forphan.sym
+Only in xv6_riscv_Modefied_File/user: generate_usys.py
+Only in xv6_riscv_Modefied_File/user: _grep
+Only in xv6_riscv_Modefied_File/user: grep.asm
+Only in xv6_riscv_Modefied_File/user: grep.d
+Only in xv6_riscv_Modefied_File/user: grep.o
+Only in xv6_riscv_Modefied_File/user: grep.sym
+Only in xv6_riscv_Modefied_File/user: _grind
+Only in xv6_riscv_Modefied_File/user: grind.asm
+Only in xv6_riscv_Modefied_File/user: grind.d
+Only in xv6_riscv_Modefied_File/user: grind.o
+Only in xv6_riscv_Modefied_File/user: grind.sym
+Only in xv6_riscv_Modefied_File/user: hapinfo.h
+Only in xv6_riscv_Modefied_File/user: _hapinfo_test
+Only in xv6_riscv_Modefied_File/user: hapinfo_test.asm
+Only in xv6_riscv_Modefied_File/user: hapinfo_test.c
+Only in xv6_riscv_Modefied_File/user: hapinfo_test.d
+Only in xv6_riscv_Modefied_File/user: hapinfo_test.o
+Only in xv6_riscv_Modefied_File/user: hapinfo_test.sym
+Only in xv6_riscv_Modefied_File/user: _init
+Only in xv6_riscv_Modefied_File/user: init.asm
+Only in xv6_riscv_Modefied_File/user: init.d
+Only in xv6_riscv_Modefied_File/user: init.o
+Only in xv6_riscv_Modefied_File/user: init.sym
+Only in xv6_riscv_Modefied_File/user: _kill
+Only in xv6_riscv_Modefied_File/user: kill.asm
+Only in xv6_riscv_Modefied_File/user: kill.d
+Only in xv6_riscv_Modefied_File/user: kill.o
+Only in xv6_riscv_Modefied_File/user: kill.sym
+Only in xv6_riscv_Modefied_File/user: _ln
+Only in xv6_riscv_Modefied_File/user: ln.asm
+Only in xv6_riscv_Modefied_File/user: ln.d
+Only in xv6_riscv_Modefied_File/user: ln.o
+Only in xv6_riscv_Modefied_File/user: ln.sym
+Only in xv6_riscv_Modefied_File/user: _logstress
+Only in xv6_riscv_Modefied_File/user: logstress.asm
+Only in xv6_riscv_Modefied_File/user: logstress.d
+Only in xv6_riscv_Modefied_File/user: logstress.o
+Only in xv6_riscv_Modefied_File/user: logstress.sym
+Only in xv6_riscv_Modefied_File/user: _ls
+Only in xv6_riscv_Modefied_File/user: ls.asm
+Only in xv6_riscv_Modefied_File/user: ls.d
+Only in xv6_riscv_Modefied_File/user: ls.o
+Only in xv6_riscv_Modefied_File/user: ls.sym
+Only in xv6_riscv_Modefied_File/user: _mkdir
+Only in xv6_riscv_Modefied_File/user: mkdir.asm
+Only in xv6_riscv_Modefied_File/user: mkdir.d
+Only in xv6_riscv_Modefied_File/user: mkdir.o
+Only in xv6_riscv_Modefied_File/user: mkdir.sym
+Only in xv6_riscv_Modefied_File/user: printf.d
+Only in xv6_riscv_Modefied_File/user: printf.o
+Only in xv6_riscv_Modefied_File/user: pstat.h
+Only in xv6_riscv_Modefied_File/user: _pstat_test
+Only in xv6_riscv_Modefied_File/user: pstat_test.c
+Only in xv6_riscv_Modefied_File/user: _rm
+Only in xv6_riscv_Modefied_File/user: rm.asm
+Only in xv6_riscv_Modefied_File/user: rm.d
+Only in xv6_riscv_Modefied_File/user: rm.o
+Only in xv6_riscv_Modefied_File/user: rm.sym
+Only in xv6_riscv_Modefied_File/user: _sh
+Only in xv6_riscv_Modefied_File/user: sh.asm
+Only in xv6_riscv_Modefied_File/user: sh.d
+Only in xv6_riscv_Modefied_File/user: sh.o
+Only in xv6_riscv_Modefied_File/user: sh.sym
+Only in xv6_riscv_Modefied_File/user: _stressfs
+Only in xv6_riscv_Modefied_File/user: stressfs.asm
+Only in xv6_riscv_Modefied_File/user: stressfs.d
+Only in xv6_riscv_Modefied_File/user: stressfs.o
+Only in xv6_riscv_Modefied_File/user: stressfs.sym
+Only in xv6_riscv_Modefied_File/user: ulib.d
+Only in xv6_riscv_Modefied_File/user: ulib.o
+Only in xv6_riscv_Modefied_File/user: umalloc.d
+Only in xv6_riscv_Modefied_File/user: umalloc.o
+diff -r "xv6-riscv Raw File/user/user.h" xv6_riscv_Modefied_File/user/user.h
+3a4
+> struct hapinfo;
+7c8
+< int exit(int) __attribute__((noreturn));
+---
+> int exit(int status) __attribute__((noreturn));
+10d10
+< int write(int, const void*, int);
+12d11
+< int close(int);
+15,17d13
+< int open(const char*, int);
+< int mknod(const char*, short, short);
+< int unlink(const char*);
+19,20d14
+< int link(const char*, const char*);
+< int mkdir(const char*);
+24a19
+> int hapinfo(struct hapinfo *hi);
+26a22,28
+> int open(const char*, int);
+> int write(int, const void*, int);
+> int mknod(const char*, short, short);
+> int unlink(const char*);
+> int link(const char*, const char*);
+> int mkdir(const char*);
+> int close(int);
+44,45c46,47
+< void fprintf(int, const char*, ...) __attribute__ ((format (printf, 2, 3)));
+< void printf(const char*, ...) __attribute__ ((format (printf, 1, 2)));
+---
+> void fprintf(int fd, const char* fmt, ...);
+> void printf(const char* fmt, ...);
+Only in xv6_riscv_Modefied_File/user: _usertests
+Only in xv6_riscv_Modefied_File/user: usertests.asm
+Only in xv6_riscv_Modefied_File/user: usertests.d
+Only in xv6_riscv_Modefied_File/user: usertests.o
+Only in xv6_riscv_Modefied_File/user: usertests.sym
+Only in xv6_riscv_Modefied_File/user: usys.d
+Only in xv6_riscv_Modefied_File/user: usys.o
+diff -r "xv6-riscv Raw File/user/usys.pl" xv6_riscv_Modefied_File/user/usys.pl
+44a45
+> entry("hapinfo");
+Only in xv6_riscv_Modefied_File/user: usys.S
+Only in xv6_riscv_Modefied_File/user: _wc
+Only in xv6_riscv_Modefied_File/user: wc.asm
+Only in xv6_riscv_Modefied_File/user: wc.d
+Only in xv6_riscv_Modefied_File/user: wc.o
+Only in xv6_riscv_Modefied_File/user: wc.sym
+Only in xv6_riscv_Modefied_File/user: _zombie
+Only in xv6_riscv_Modefied_File/user: zombie.asm
+Only in xv6_riscv_Modefied_File/user: zombie.d
+Only in xv6_riscv_Modefied_File/user: zombie.o
+Only in xv6_riscv_Modefied_File/user: zombie.sym
+Only in xv6_riscv_Modefied_File: .vscode

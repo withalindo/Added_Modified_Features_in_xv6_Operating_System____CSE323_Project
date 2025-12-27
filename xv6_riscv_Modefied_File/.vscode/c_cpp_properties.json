@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "xv6-riscv",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/kernel",
+                "${workspaceFolder}/user"
+            ],
+            "defines": [
+                "NPROC=64" // Optional: Helps VS Code know NPROC's value
+            ],
+            "compilerPath": "/usr/bin/gcc", // Placeholder, as we use a cross-compiler
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
