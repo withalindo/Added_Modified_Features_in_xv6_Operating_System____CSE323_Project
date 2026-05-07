@@ -12,7 +12,7 @@ Standard xv6 provides minimal insight into real-time process behavior and memory
 #### 🧠 Heap Growth Tracking (`hapinfo`)
 A specialized logging system that records every heap adjustment made via `sbrk()`.
 * **Chronological Logging**: Captures size changes along with precise system timestamps in ticks.
-* **Memory Transparency**: Allows developers to pinpoint the exact sequence and timing of heap expansions and shrinkages.
+* **Memory Transparency**: Allows developers to pinpoint the exact sequence and timing of heap expansions and shrinkages. 
 * **Concurrency Safety**: Uses atomic logging protected by `tickslock`.
 
 #### 📈 Process Statistics (`getpinfo`)
